@@ -53,6 +53,10 @@
       font-size: 16px;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     img {
       max-width: 100%;
       display: block;
@@ -131,11 +135,27 @@
       color: #ffffff;
     }
 
-    .nav-desktop a:hover {
-      text-decoration: underline;
-      text-decoration-color: var(--color-lime);
-      text-decoration-thickness: 3px;
-      text-underline-offset: 4px;
+    .nav-link {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    .nav-link::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--color-lime);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link:focus-visible::after {
+      transform: scaleX(1);
     }
 
     .site-header .btn-login-yellow {
@@ -162,23 +182,61 @@
       overflow: hidden;
       padding: 0 20px;
       border-top: 1px solid rgba(255, 255, 255, 0.12);
-      background: #111827;
+      background: rgba(17, 24, 39, 0.98);
       color: #ffffff;
-      transition: max-height 0.3s ease, opacity 0.3s ease, padding 0.3s ease;
-    }
-
-    .mobile-menu ul {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      font-weight: 500;
-      font-size: 18px;
+      transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
+      transform: translateY(-10px);
+      border-radius: 0 0 18px 18px;
+      box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
     }
 
     .mobile-menu.is-open {
-      max-height: 360px;
+      max-height: 520px;
       opacity: 1;
       padding: 20px;
+      transform: translateY(0);
+    }
+
+    .mobile-menu-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 16px;
+    }
+
+    .mobile-menu-link {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      border-radius: 14px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .mobile-menu-link span {
+      font-size: 18px;
+      opacity: 0.8;
+    }
+
+    .mobile-menu-link:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, 0.16);
+    }
+
+    .mobile-menu-actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    @media (max-width: 520px) {
+      .mobile-menu-links {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     /* КНОПКИ */
@@ -922,7 +980,7 @@
       font-weight: 600;
     }
 
-    .place-card-link span {
+    .place-card-link-icon {
       width: 34px;
       height: 34px;
       border-radius: 50%;
@@ -934,7 +992,12 @@
       transition: transform 0.3s ease;
     }
 
-    .place-card-link:hover span {
+    .place-card-link-icon svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    .place-card-link:hover .place-card-link-icon {
       transform: rotate(45deg);
     }
 
@@ -952,24 +1015,24 @@
       }
     }
 
-    .how-main-card {
+    .how-column {
       background: #ffffff;
-      border-radius: var(--radius-lg);
+      border-radius: 16px;
+      padding: 24px;
+      border: 1px solid #e5e7eb;
       box-shadow: var(--shadow-card);
-      padding: 24px 24px 20px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.05fr);
-      gap: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    @media (max-width: 700px) {
-      .how-main-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
+    .how-column--accent {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #eef2ff 100%);
+      border-color: #dbeafe;
     }
 
     .how-column-header {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .how-column-kicker {
@@ -981,8 +1044,8 @@
     }
 
     .how-column-title {
-      font-size: 16px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 700;
       letter-spacing: -0.03em;
       margin: 0;
     }
@@ -990,26 +1053,61 @@
     .how-list {
       list-style: none;
       padding: 0;
-      margin: 10px 0 0;
-      font-size: 13px;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      font-size: 14px;
       color: #374151;
+      line-height: 1.6;
     }
 
     .how-list li {
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      padding: 4px 0;
+      display: grid;
+      grid-template-columns: 32px minmax(0, 1fr);
+      gap: 12px;
+      align-items: start;
+      padding: 10px 12px;
+      border-radius: 12px;
+      background: #ffffff;
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
     }
 
     .how-list li span {
-      font-size: 16px;
+      font-size: 18px;
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: #fef3c7;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .how-note {
-      margin-top: 8px;
-      font-size: 12px;
+      margin-top: 4px;
+      font-size: 13px;
       color: var(--text-muted);
+    }
+
+    .how-column-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .how-column-cta .btn-primary {
+      background: #111827;
+      color: #f9fafb;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.2);
+    }
+
+    .how-column-cta-note {
+      font-size: 12px;
+      color: #6b7280;
     }
 
     .how-card-right {
@@ -1024,6 +1122,10 @@
       flex-direction: column;
       justify-content: space-between;
       min-height: 220px;
+    }
+
+    .how-card-right--variant {
+      min-height: auto;
     }
 
     .how-card-pill {
@@ -1113,20 +1215,20 @@
 
     .features {
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-      gap: 20px;
-    }
-
-    @media (max-width: 900px) {
-      .features {
-        grid-template-columns: minmax(0, 1fr);
-      }
+      grid-template-columns: minmax(0, 1fr);
+      gap: 28px;
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .features-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 640px) {
@@ -1138,7 +1240,7 @@
     .feature-card {
       background: #ffffff;
       border-radius: var(--radius-md);
-      padding: 12px 12px 10px;
+      padding: 18px 18px 16px;
       position: relative;
       overflow: hidden;
       box-shadow: 0 12px 30px rgba(15, 23, 42, 0.04);
@@ -1162,7 +1264,7 @@
     }
 
     .feature-title {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       margin-bottom: 4px;
     }
@@ -1172,6 +1274,7 @@
       color: var(--text-muted);
       margin: 0;
       margin-bottom: 10px;
+      line-height: 1.6;
     }
 
     .feature-badge {
@@ -1189,13 +1292,13 @@
       border-radius: var(--radius-lg);
       background: #050816;
       color: #e5e7eb;
-      padding: 20px 20px 18px;
+      padding: 26px 24px 22px;
       position: relative;
       overflow: hidden;
     }
 
     .features-side-title {
-      font-size: 15px;
+      font-size: 16px;
       font-weight: 600;
       margin-bottom: 6px;
     }
@@ -1203,23 +1306,45 @@
     .features-side-text {
       font-size: 13px;
       color: #9ca3af;
-      margin-bottom: 10px;
+      margin-bottom: 12px;
+      line-height: 1.6;
     }
 
     .features-side-list {
       list-style: none;
       padding: 0;
       margin: 0 0 10px;
-      font-size: 13px;
+      font-size: 14px;
     }
 
     .features-side-list li {
-      display: flex;
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr);
       align-items: center;
-      gap: 6px;
-      padding: 3px 0;
+      gap: 14px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      line-height: 1.6;
     }
 
+    .features-ill {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: rgba(250, 204, 21, 0.18);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #facc15;
+      box-shadow: inset 0 0 0 1px rgba(250, 204, 21, 0.3);
+    }
+
+    .features-ill svg {
+      width: 30px;
+      height: 30px;
+    }
     .features-side-pulse {
       position: absolute;
       inset: 0;
@@ -1232,7 +1357,7 @@
     .advantages {
       background: #f1f2f8;
       border-radius: 28px;
-      padding: 28px;
+      padding: 32px;
       color: #111827;
     }
 
@@ -1272,31 +1397,44 @@
 
     .advantages-list {
       display: flex;
-      gap: 16px;
+      gap: 20px;
       overflow-x: auto;
       padding-bottom: 10px;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
 
+    .advantages-list::-webkit-scrollbar {
+      display: none;
+    }
 
     .adv-card {
-      border-radius: 28px;
+      border-radius: 24px;
       padding: 22px;
-      background: #f9fafb;
-      border: 2px solid #111827;
+      background: linear-gradient(135deg, #f9fafb 0%, #eef2ff 55%, #fef3c7 100%);
+      border: 1px solid #e5e7eb;
+      box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
       display: grid;
       grid-template-columns: minmax(0, 1fr);
       gap: 12px;
       align-items: flex-start;
       min-width: 260px;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: 1 / 1.05;
       scroll-snap-align: start;
+      transition: transform var(--transition-fast),
+        box-shadow var(--transition-fast);
+    }
+
+    .adv-card:hover {
+      transform: scale(1.04);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.16);
     }
 
     .adv-icon {
       width: 72px;
       height: 72px;
       border-radius: 999px;
-      background: #ffeb5a;
+      background: #fff4c7;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1328,8 +1466,53 @@
     }
 
     .adv-card--soft {
-      background: #f9fafb;
-      border-style: solid;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 55%, #e0f2fe 100%);
+    }
+
+    .adv-card--cta {
+      background: linear-gradient(135deg, #ffb347 0%, #f97316 55%, #fb923c 100%);
+      color: #111827;
+      border: none;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .adv-card--cta .adv-icon {
+      background: rgba(255, 255, 255, 0.8);
+    }
+
+    .adv-card--cta .adv-main-text {
+      color: rgba(17, 24, 39, 0.8);
+    }
+
+    .adv-card--cta::after {
+      content: "";
+      position: absolute;
+      inset: 14px;
+      border-radius: 18px;
+      border: 1px dashed rgba(255, 255, 255, 0.6);
+      pointer-events: none;
+    }
+
+    @media (max-width: 980px) {
+      .advantages-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        overflow: visible;
+        padding-bottom: 0;
+      }
+
+      .adv-card {
+        min-width: 0;
+        aspect-ratio: auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .advantages-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
     }
 
     /* 6) ТАРИФЫ — GRID, ПРЕМИУМ В ЦЕНТРЕ, HOVER */
@@ -1571,10 +1754,10 @@
     }
 
     .contact-form {
-      background: rgba(15, 23, 42, 0.9);
+      background: linear-gradient(135deg, #ffb347 0%, #f97316 55%, #fb923c 100%);
       border-radius: 18px;
-      padding: 14px 14px 12px;
-      border: 1px solid rgba(148, 163, 184, 0.6);
+      padding: 16px 16px 14px;
+      border: none;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -1582,7 +1765,7 @@
 
     .field-label {
       font-size: 11px;
-      color: #9ca3af;
+      color: #4b2a05;
       margin-bottom: 2px;
     }
 
@@ -1590,9 +1773,9 @@
     .field-textarea {
       width: 100%;
       border-radius: 12px;
-      border: 1px solid rgba(55, 65, 81, 0.8);
-      background: #020617;
-      color: #f9fafb;
+      border: 1px solid rgba(251, 191, 36, 0.85);
+      background: rgba(255, 255, 255, 0.95);
+      color: #111827;
       font-size: 13px;
       padding: 8px 10px;
       outline: none;
@@ -1603,14 +1786,14 @@
 
     .field-input::placeholder,
     .field-textarea::placeholder {
-      color: #6b7280;
+      color: rgba(120, 74, 26, 0.7);
     }
 
     .field-input:focus,
     .field-textarea:focus {
-      border-color: #facc15;
-      box-shadow: 0 0 0 1px #facc15;
-      background: #020617;
+      border-color: #111827;
+      box-shadow: 0 0 0 1px #111827;
+      background: #ffffff;
     }
 
     .field-row {
@@ -1642,7 +1825,7 @@
 
     .contact-submit-note {
       font-size: 11px;
-      color: #6b7280;
+      color: rgba(55, 33, 12, 0.75);
     }
 
     /* 8) КНОПКА ВВЕРХ */
@@ -1723,10 +1906,26 @@
     }
 
     .footer-links {
-      display: grid;
-      gap: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
       font-size: 14px;
       color: #e5e7eb;
+    }
+
+    .footer-links a {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: rgba(17, 24, 39, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-links .nav-link::after {
+      background: var(--color-lime);
     }
 
     .footer-bottom {
@@ -1758,11 +1957,12 @@
       <div class="container header-inner">
         <div class="logo">taam.menu</div>
         <nav class="nav-desktop">
-          <a href="#">Каталог</a>
-          <a href="#">Как это работает?</a>
-          <a href="#">Преимущества</a>
-          <a href="#">Тарифы</a>
-          <a href="#">О нас</a>
+          <a class="nav-link" href="#catalog">Каталог</a>
+          <a class="nav-link" href="#how-modes">Как это работает?</a>
+          <a class="nav-link" href="#features">Функции</a>
+          <a class="nav-link" href="#advantages">Преимущества</a>
+          <a class="nav-link" href="#tariffs">Тарифы</a>
+          <a class="nav-link" href="#contacts">Контакты</a>
         </nav>
         <div class="header-btn-wrap">
           <a href="https://taam.menu/login" class="btn-login-yellow">
@@ -1802,33 +2002,52 @@
         </button>
       </div>
       <div id="mobile-menu" class="mobile-menu">
-        <ul>
-          <li><a href="#">Каталог</a></li>
-          <li><a href="#">Как это работает?</a></li>
-          <li><a href="#">Преимущества</a></li>
-          <li><a href="#">Тарифы</a></li>
-          <li><a href="#">О нас</a></li>
-          <li>
-            <a href="https://taam.menu/login" class="btn-login-yellow" style="justify-content: center; width: 100%;">
-              Войти
-              <div class="login-icon-circle">
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="black"
-                  stroke-width="2.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <line x1="7" y1="17" x2="17" y2="7"></line>
-                  <polyline points="7 7 17 7 17 17"></polyline>
-                </svg>
-              </div>
-            </a>
-          </li>
-        </ul>
+        <div class="mobile-menu-links">
+          <a class="mobile-menu-link nav-link" href="#catalog">
+            Каталог
+            <span>•</span>
+          </a>
+          <a class="mobile-menu-link nav-link" href="#how-modes">
+            Как это работает
+            <span>•</span>
+          </a>
+          <a class="mobile-menu-link nav-link" href="#features">
+            Функции
+            <span>•</span>
+          </a>
+          <a class="mobile-menu-link nav-link" href="#advantages">
+            Преимущества
+            <span>•</span>
+          </a>
+          <a class="mobile-menu-link nav-link" href="#tariffs">
+            Тарифы
+            <span>•</span>
+          </a>
+          <a class="mobile-menu-link nav-link" href="#contacts">
+            Контакты
+            <span>•</span>
+          </a>
+        </div>
+        <div class="mobile-menu-actions">
+          <a href="https://taam.menu/login" class="btn-login-yellow" style="justify-content: center; width: 100%;">
+            Войти
+            <div class="login-icon-circle">
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="black"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="7" y1="17" x2="17" y2="7"></line>
+                <polyline points="7 7 17 7 17 17"></polyline>
+              </svg>
+            </div>
+          </a>
+        </div>
       </div>
     </header>
 
@@ -2042,86 +2261,73 @@
           </div>
 
           <div class="how">
-            <div class="how-main-card">
-              <div>
-                <div class="how-column-header">
-                  <div class="how-column-kicker">Вариант 1</div>
-                  <h3 class="how-column-title">Самостоятельно — за вечер</h3>
-                </div>
-                <ul class="how-list">
-                  <li>
-                    <span>🔑</span>
-                    <div>Зарегистрируйтесь в taam.menu и создайте профиль заведения.</div>
-                  </li>
-                  <li>
-                    <span>🍽</span>
-                    <div>Добавьте блюда, категории и цены — меню собирается прямо в браузере.</div>
-                  </li>
-                  <li>
-                    <span>📲</span>
-                    <div>Получите QR‑код и ссылку, разместите их на столах и в соцсетях.</div>
-                  </li>
-                </ul>
-                <p class="how-note">
-                  Подходит, если есть человек, готовый быстро внести позиции и фото в систему.
-                </p>
+            <div class="how-column how-column--accent">
+              <div class="how-column-header">
+                <div class="how-column-kicker">Вариант 1</div>
+                <h3 class="how-column-title">Самостоятельно — за вечер</h3>
               </div>
-
-              <div>
-                <div class="how-column-header">
-                  <div class="how-column-kicker">Вариант 2</div>
-                  <h3 class="how-column-title">С нашей поддержкой “под ключ”</h3>
-                </div>
-                <ul class="how-list">
-                  <li>
-                    <span>📷</span>
-                    <div>Помогаем с фотографиями и оформлением позиций.</div>
-                  </li>
-                  <li>
-                    <span>🧾</span>
-                    <div>Создаём цифровое меню с блюдами, категориями и ценами вместо вас.</div>
-                  </li>
-                  <li>
-                    <span>🧩</span>
-                    <div>Готовим и печатаем таблички с QR‑кодами на столы.</div>
-                  </li>
-                  <li>
-                    <span>🌐</span>
-                    <div>Добавляем заведение на сайт taam.menu и настраиваем каталог.</div>
-                  </li>
-                </ul>
-                <p class="how-note">
-                  Вы передаёте меню в любом виде — мы запускаем цифровое меню и доводим до результата.
-                </p>
+              <ul class="how-list">
+                <li>
+                  <span>🔑</span>
+                  <div><strong>Быстро зарегистрируйтесь</strong> в taam.menu и создайте профиль заведения.</div>
+                </li>
+                <li>
+                  <span>🍽</span>
+                  <div><strong>Добавьте блюда и цены</strong> — меню собирается прямо в браузере.</div>
+                </li>
+                <li>
+                  <span>📲</span>
+                  <div><strong>Получите QR‑код</strong> и разместите его на столах и в соцсетях.</div>
+                </li>
+              </ul>
+              <p class="how-note">
+                Подходит, если есть человек, готовый быстро внести позиции и фото в систему.
+              </p>
+              <div class="how-column-cta">
+                <a href="https://taam.menu/login" class="btn-primary">Начать самостоятельно</a>
+                <span class="how-column-cta-note">получите демо за 1–2 минуты</span>
               </div>
             </div>
 
-            <aside class="how-card-right">
+            <div class="how-card-right how-card-right--variant">
               <div class="how-card-pill">
                 <span>🎯</span>
-                <span>Минимум рутинных задач</span>
+                <span>Вариант 2</span>
               </div>
-              <h3 class="how-card-title">Выбирайте формат, который подходит именно вашему заведению</h3>
-              <p class="how-card-text">
-                Можно начать с демо‑доступа и самостоятельно собрать меню, а если не хватает времени — подключить поддержку taam.menu в любой момент.
+              <h3 class="how-card-title">С нашей поддержкой “под ключ”</h3>
+              <ul class="how-list">
+                <li>
+                  <span>📷</span>
+                  <div>Помогаем с фотографиями и оформлением позиций.</div>
+                </li>
+                <li>
+                  <span>🧾</span>
+                  <div>Создаём цифровое меню с блюдами, категориями и ценами вместо вас.</div>
+                </li>
+                <li>
+                  <span>🧩</span>
+                  <div>Готовим и печатаем таблички с QR‑кодами на столы.</div>
+                </li>
+                <li>
+                  <span>🌐</span>
+                  <div>Добавляем заведение на сайт taam.menu и настраиваем каталог.</div>
+                </li>
+              </ul>
+              <p class="how-note">
+                Вы передаёте меню в любом виде — мы запускаем цифровое меню и доводим до результата.
               </p>
-              <div class="how-card-badges">
-                <span class="how-card-badge">Запуск за 1–3 дня</span>
-                <span class="how-card-badge">Поддержка в мессенджерах</span>
-                <span class="how-card-badge">Без перепечатки меню</span>
-              </div>
               <div class="how-card-cta">
-                <a href="https://taam.menu/login"  class="btn-primary">Получить демо‑доступ</a>
-                <span class="how-card-cta-note">или обсудить запуск “под ключ”</span>
+                <a href="https://taam.menu/login" class="btn-primary">Запустить “под ключ”</a>
+                <span class="how-card-cta-note">обсудить сроки и стоимость</span>
               </div>
               <div class="how-card-blob"></div>
-            </aside>
+            </div>
           </div>
         </div>
       </section>
 
       <!-- ЧТО УМЕЕТ TAAM — БОЛЕЕ ПРОДАЮЩИЙ БЛОК -->
-      <section>
+      <section id="features">
         <div class="container">
           <div class="section-header">
             <div class="section-kicker">Функции сервиса</div>
@@ -2168,6 +2374,24 @@
                 </p>
                 <span class="feature-badge">QR + SEO</span>
               </article>
+
+              <article class="feature-card">
+                <div class="feature-tag">Заказы</div>
+                <h3 class="feature-title">Доставка и заказы онлайн</h3>
+                <p class="feature-text">
+                  Принимайте заказы прямо из меню и уменьшайте количество звонков и ошибок.
+                </p>
+                <span class="feature-badge">Онлайн-заказы</span>
+              </article>
+
+              <article class="feature-card">
+                <div class="feature-tag">Данные</div>
+                <h3 class="feature-title">Статистика и аналитика</h3>
+                <p class="feature-text">
+                  Понимайте, что заказывают чаще всего, и быстрее обновляйте меню под спрос.
+                </p>
+                <span class="feature-badge">Аналитика</span>
+              </article>
             </div>
 
             <aside class="features-side">
@@ -2177,15 +2401,38 @@
               </p>
               <ul class="features-side-list">
                 <li>
-                  <span>📈</span>
+                  <span class="features-ill" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M4 18V9"></path>
+                      <path d="M10 18V6"></path>
+                      <path d="M16 18v-4"></path>
+                      <path d="M20 18v-8"></path>
+                    </svg>
+                  </span>
                   <span>Статистика заказов — какие позиции приносят максимум выручки.</span>
                 </li>
                 <li>
-                  <span>🧮</span>
+                  <span class="features-ill" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+                      <path d="M8 9h8"></path>
+                      <path d="M8 13h3"></path>
+                      <path d="M13 13h3"></path>
+                      <path d="M8 17h3"></path>
+                      <path d="M13 17h3"></path>
+                    </svg>
+                  </span>
                   <span>Аналитика по категориям и времени — что заказывают утром и вечером.</span>
                 </li>
                 <li>
-                  <span>🌍</span>
+                  <span class="features-ill" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="8"></circle>
+                      <path d="M4 12h16"></path>
+                      <path d="M12 4a12 12 0 0 1 0 16"></path>
+                      <path d="M12 4a12 12 0 0 0 0 16"></path>
+                    </svg>
+                  </span>
                   <span>Поддержка разных валют для туристов и гостей из других стран.</span>
                 </li>
               </ul>
@@ -2199,7 +2446,7 @@
       </section>
 
       <!-- ПРЕИМУЩЕСТВА — ЛИСТАЮТСЯ ПО СКРОЛЛУ -->
-      <section>
+      <section id="advantages">
         <div class="container">
           <div class="advantages">
             <div class="advantages-header">
@@ -2239,6 +2486,12 @@
                   Ваше заведение в каталоге taam.menu, где гости ищут по городам, кухням и тегам.
                 </p>
               </article>
+
+              <a class="adv-card adv-card--cta" href="https://taam.menu/login">
+                <div class="adv-icon">🚀</div>
+                <div class="adv-main-title">Получить все преимущества</div>
+                <p class="adv-main-text">Заберите полный набор функций и начните работать уже сегодня.</p>
+              </a>
             </div>
           </div>
         </div>
@@ -2460,10 +2713,10 @@
           </div>
 
           <div class="footer-links">
-            <a href="#catalog">Каталог</a>
-            <a href="#how-modes">Как это работает</a>
-            <a href="#tariffs">Тарифы</a>
-            <a href="#contacts">Контакты</a>
+            <a class="nav-link" href="#catalog">Каталог</a>
+            <a class="nav-link" href="#how-modes">Как это работает</a>
+            <a class="nav-link" href="#tariffs">Тарифы</a>
+            <a class="nav-link" href="#contacts">Контакты</a>
           </div>
 
           <div style="margin-left: auto;">
@@ -2686,7 +2939,12 @@
                     <span>${item.name}</span>
                     <a href="${item.link}" class="place-card-link" target="_blank" rel="noopener">
                       Перейти
-                      <span>↗</span>
+                      <span class="place-card-link-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+                          <line x1="7" y1="17" x2="17" y2="7"></line>
+                          <polyline points="7 7 17 7 17 17"></polyline>
+                        </svg>
+                      </span>
                     </a>
                   </div>
                 </div>
