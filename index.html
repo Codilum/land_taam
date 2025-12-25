@@ -1005,31 +1005,24 @@
       }
     }
 
-    .how-main-card {
-      background: #ffffff;
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-card);
-      padding: 30px;
-      display: grid;
-      grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.05fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 700px) {
-      .how-main-card {
-        grid-template-columns: minmax(0, 1fr);
-      }
-    }
-
     .how-column {
-      background: #f8fafc;
+      background: #ffffff;
       border-radius: 16px;
-      padding: 18px;
+      padding: 24px;
       border: 1px solid #e5e7eb;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .how-column--accent {
+      background: linear-gradient(135deg, #ffffff 0%, #f8fafc 45%, #eef2ff 100%);
+      border-color: #dbeafe;
     }
 
     .how-column-header {
-      margin-bottom: 12px;
+      margin-bottom: 6px;
     }
 
     .how-column-kicker {
@@ -1041,8 +1034,8 @@
     }
 
     .how-column-title {
-      font-size: 17px;
-      font-weight: 600;
+      font-size: 18px;
+      font-weight: 700;
       letter-spacing: -0.03em;
       margin: 0;
     }
@@ -1050,7 +1043,7 @@
     .how-list {
       list-style: none;
       padding: 0;
-      margin: 12px 0 0;
+      margin: 0;
       font-size: 14px;
       color: #374151;
       line-height: 1.6;
@@ -1068,9 +1061,28 @@
     }
 
     .how-note {
-      margin-top: 12px;
+      margin-top: 4px;
       font-size: 13px;
       color: var(--text-muted);
+    }
+
+    .how-column-cta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+
+    .how-column-cta .btn-primary {
+      background: #111827;
+      color: #f9fafb;
+      box-shadow: 0 14px 35px rgba(15, 23, 42, 0.2);
+    }
+
+    .how-column-cta-note {
+      font-size: 12px;
+      color: #6b7280;
     }
 
     .how-card-right {
@@ -1085,6 +1097,10 @@
       flex-direction: column;
       justify-content: space-between;
       min-height: 220px;
+    }
+
+    .how-card-right--variant {
+      min-height: auto;
     }
 
     .how-card-pill {
@@ -1174,20 +1190,20 @@
 
     .features {
       display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      grid-template-columns: minmax(0, 1fr);
       gap: 28px;
-    }
-
-    @media (max-width: 900px) {
-      .features {
-        grid-template-columns: minmax(0, 1fr);
-      }
     }
 
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
+    }
+
+    @media (max-width: 980px) {
+      .features-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 640px) {
@@ -1350,7 +1366,7 @@
     .adv-card {
       border-radius: 24px;
       padding: 22px;
-      background: #ffffff;
+      background: linear-gradient(135deg, #f9fafb 0%, #eef2ff 55%, #fef3c7 100%);
       border: 1px solid #e5e7eb;
       box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
       display: grid;
@@ -1405,7 +1421,7 @@
     }
 
     .adv-card--soft {
-      background: #f8fafc;
+      background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 55%, #e0f2fe 100%);
     }
 
     .adv-card--cta {
@@ -2200,80 +2216,67 @@
           </div>
 
           <div class="how">
-            <div class="how-main-card">
-              <div class="how-column">
-                <div class="how-column-header">
-                  <div class="how-column-kicker">Вариант 1</div>
-                  <h3 class="how-column-title">Самостоятельно — за вечер</h3>
-                </div>
-                <ul class="how-list">
-                  <li>
-                    <span>🔑</span>
-                    <div>Зарегистрируйтесь в taam.menu и создайте профиль заведения.</div>
-                  </li>
-                  <li>
-                    <span>🍽</span>
-                    <div>Добавьте блюда, категории и цены — меню собирается прямо в браузере.</div>
-                  </li>
-                  <li>
-                    <span>📲</span>
-                    <div>Получите QR‑код и ссылку, разместите их на столах и в соцсетях.</div>
-                  </li>
-                </ul>
-                <p class="how-note">
-                  Подходит, если есть человек, готовый быстро внести позиции и фото в систему.
-                </p>
+            <div class="how-column how-column--accent">
+              <div class="how-column-header">
+                <div class="how-column-kicker">Вариант 1</div>
+                <h3 class="how-column-title">Самостоятельно — за вечер</h3>
               </div>
-
-              <div class="how-column">
-                <div class="how-column-header">
-                  <div class="how-column-kicker">Вариант 2</div>
-                  <h3 class="how-column-title">С нашей поддержкой “под ключ”</h3>
-                </div>
-                <ul class="how-list">
-                  <li>
-                    <span>📷</span>
-                    <div>Помогаем с фотографиями и оформлением позиций.</div>
-                  </li>
-                  <li>
-                    <span>🧾</span>
-                    <div>Создаём цифровое меню с блюдами, категориями и ценами вместо вас.</div>
-                  </li>
-                  <li>
-                    <span>🧩</span>
-                    <div>Готовим и печатаем таблички с QR‑кодами на столы.</div>
-                  </li>
-                  <li>
-                    <span>🌐</span>
-                    <div>Добавляем заведение на сайт taam.menu и настраиваем каталог.</div>
-                  </li>
-                </ul>
-                <p class="how-note">
-                  Вы передаёте меню в любом виде — мы запускаем цифровое меню и доводим до результата.
-                </p>
+              <ul class="how-list">
+                <li>
+                  <span>🔑</span>
+                  <div><strong>Быстро зарегистрируйтесь</strong> в taam.menu и создайте профиль заведения.</div>
+                </li>
+                <li>
+                  <span>🍽</span>
+                  <div><strong>Добавьте блюда и цены</strong> — меню собирается прямо в браузере.</div>
+                </li>
+                <li>
+                  <span>📲</span>
+                  <div><strong>Получите QR‑код</strong> и разместите его на столах и в соцсетях.</div>
+                </li>
+              </ul>
+              <p class="how-note">
+                Подходит, если есть человек, готовый быстро внести позиции и фото в систему.
+              </p>
+              <div class="how-column-cta">
+                <a href="https://taam.menu/login" class="btn-primary">Начать самостоятельно</a>
+                <span class="how-column-cta-note">получите демо за 1–2 минуты</span>
               </div>
             </div>
 
-            <aside class="how-card-right">
+            <div class="how-card-right how-card-right--variant">
               <div class="how-card-pill">
                 <span>🎯</span>
-                <span>Минимум рутинных задач</span>
+                <span>Вариант 2</span>
               </div>
-              <h3 class="how-card-title">Выбирайте формат, который подходит именно вашему заведению</h3>
-              <p class="how-card-text">
-                Можно начать с демо‑доступа и самостоятельно собрать меню, а если не хватает времени — подключить поддержку taam.menu в любой момент.
+              <h3 class="how-card-title">С нашей поддержкой “под ключ”</h3>
+              <ul class="how-list">
+                <li>
+                  <span>📷</span>
+                  <div>Помогаем с фотографиями и оформлением позиций.</div>
+                </li>
+                <li>
+                  <span>🧾</span>
+                  <div>Создаём цифровое меню с блюдами, категориями и ценами вместо вас.</div>
+                </li>
+                <li>
+                  <span>🧩</span>
+                  <div>Готовим и печатаем таблички с QR‑кодами на столы.</div>
+                </li>
+                <li>
+                  <span>🌐</span>
+                  <div>Добавляем заведение на сайт taam.menu и настраиваем каталог.</div>
+                </li>
+              </ul>
+              <p class="how-note">
+                Вы передаёте меню в любом виде — мы запускаем цифровое меню и доводим до результата.
               </p>
-              <div class="how-card-badges">
-                <span class="how-card-badge">Запуск за 1–3 дня</span>
-                <span class="how-card-badge">Поддержка в мессенджерах</span>
-                <span class="how-card-badge">Без перепечатки меню</span>
-              </div>
               <div class="how-card-cta">
-                <a href="https://taam.menu/login"  class="btn-primary">Получить демо‑доступ</a>
-                <span class="how-card-cta-note">или обсудить запуск “под ключ”</span>
+                <a href="https://taam.menu/login" class="btn-primary">Запустить “под ключ”</a>
+                <span class="how-card-cta-note">обсудить сроки и стоимость</span>
               </div>
               <div class="how-card-blob"></div>
-            </aside>
+            </div>
           </div>
         </div>
       </section>
@@ -2325,6 +2328,24 @@
                   QR‑коды на столах, ссылка в соцсетях и индексация в поиске — дополнительный трафик и новые гости.
                 </p>
                 <span class="feature-badge">QR + SEO</span>
+              </article>
+
+              <article class="feature-card">
+                <div class="feature-tag">Заказы</div>
+                <h3 class="feature-title">Доставка и заказы онлайн</h3>
+                <p class="feature-text">
+                  Принимайте заказы прямо из меню и уменьшайте количество звонков и ошибок.
+                </p>
+                <span class="feature-badge">Онлайн-заказы</span>
+              </article>
+
+              <article class="feature-card">
+                <div class="feature-tag">Данные</div>
+                <h3 class="feature-title">Статистика и аналитика</h3>
+                <p class="feature-text">
+                  Понимайте, что заказывают чаще всего, и быстрее обновляйте меню под спрос.
+                </p>
+                <span class="feature-badge">Аналитика</span>
               </article>
             </div>
 
