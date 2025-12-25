@@ -1,8 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>taam.menu — Цифровые меню для кафе и ресторанов</title>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>taam.menu</title>
+  <meta name="description"
+    content="taam.menu — это цифровое меню для ресторанов, кафе и кофеен. Создавайте и обновляйте меню за пару минут. Гости получают доступ по QR-коду или ссылке прямо со смартфона." />
+  <meta property="og:url" content="https://taam.menu" />
+  <meta property="og:title" content="Меню, которое всегда актуально" />
+  <meta name="keywords" content="цифровое меню, qr меню, меню для ресторана, taam.menu, онлайн меню, меню для кафе, меню по qr коду, taam, таам, меню для кофейни" />
+  <meta property="og:description"
+    content="taam.menu — это цифровое меню для ресторанов, кафе и кофеен. Создавайте и обновляйте меню за пару минут. Гости получают доступ по QR-коду или ссылке прямо со смартфона." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/tild6333-3364-4138-a632-636234383731__chatgpt_image_15__20.png" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta http-equiv="x-dns-prefetch-control" content="on">
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon" />
+  <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -140,7 +155,7 @@
       padding-bottom: 4px;
     }
 
-    .nav-link::after {
+    .nav-link.header-link::after {
       content: "";
       position: absolute;
       left: 0;
@@ -186,7 +201,7 @@
       color: #ffffff;
       transition: max-height 0.35s ease, opacity 0.35s ease, padding 0.35s ease;
       transform: translateY(-10px);
-      border-radius: 0 0 18px 18px;
+      border-radius: 18px;
       box-shadow: 0 20px 40px rgba(15, 23, 42, 0.35);
     }
 
@@ -1005,7 +1020,7 @@
 
     .how {
       display: grid;
-      grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.95fr);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 24px;
     }
 
@@ -1067,11 +1082,7 @@
       grid-template-columns: 32px minmax(0, 1fr);
       gap: 12px;
       align-items: start;
-      padding: 10px 12px;
       border-radius: 12px;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
     }
 
     .how-list li span {
@@ -1086,7 +1097,7 @@
     }
 
     .how-note {
-      margin-top: 4px;
+      margin-top: 15px;
       font-size: 13px;
       color: var(--text-muted);
     }
@@ -1144,7 +1155,6 @@
       font-weight: 700;
       letter-spacing: -0.04em;
       margin-bottom: 8px;
-      max-width: 240px;
     }
 
     .how-card-text {
@@ -1272,8 +1282,7 @@
     .feature-text {
       font-size: 13px;
       color: var(--text-muted);
-      margin: 0;
-      margin-bottom: 10px;
+      margin-bottom: 30px;
       line-height: 1.6;
     }
 
@@ -1385,7 +1394,7 @@
 
     .advantages-title {
       font-size: 26px;
-      letter-spacing: -0.03em;
+      letter-spacing: 0.05em;
       margin: 0;
     }
 
@@ -1399,7 +1408,7 @@
       display: flex;
       gap: 20px;
       overflow-x: auto;
-      padding-bottom: 10px;
+      padding: 45px;
       scrollbar-width: none;
       -ms-overflow-style: none;
     }
@@ -1411,7 +1420,7 @@
     .adv-card {
       border-radius: 24px;
       padding: 22px;
-      background: linear-gradient(135deg, #f9fafb 0%, #eef2ff 55%, #fef3c7 100%);
+      /* background: linear-gradient(135deg, #f9fafb 0%, #eef2ff 55%, #fef3c7 100%); */
       border: 1px solid #e5e7eb;
       box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
       display: grid;
@@ -1873,7 +1882,7 @@
 
     .footer-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 160px);
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 160px);
       gap: 24px;
       align-items: start;
       padding: 28px;
@@ -1957,12 +1966,12 @@
       <div class="container header-inner">
         <div class="logo">taam.menu</div>
         <nav class="nav-desktop">
-          <a class="nav-link" href="#catalog">Каталог</a>
-          <a class="nav-link" href="#how-modes">Как это работает?</a>
-          <a class="nav-link" href="#features">Функции</a>
-          <a class="nav-link" href="#advantages">Преимущества</a>
-          <a class="nav-link" href="#tariffs">Тарифы</a>
-          <a class="nav-link" href="#contacts">Контакты</a>
+          <a class="nav-link header-link" href="#catalog">Каталог</a>
+          <a class="nav-link header-link" href="#how-modes">Как это работает?</a>
+          <a class="nav-link header-link" href="#features">Функции</a>
+          <a class="nav-link header-link" href="#advantages">Преимущества</a>
+          <a class="nav-link header-link" href="#tariffs">Тарифы</a>
+          <a class="nav-link header-link" href="#contacts">Контакты</a>
         </nav>
         <div class="header-btn-wrap">
           <a href="https://taam.menu/login" class="btn-login-yellow">
